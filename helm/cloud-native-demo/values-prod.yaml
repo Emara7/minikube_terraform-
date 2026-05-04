@@ -1,19 +1,15 @@
 replicaCount: 3
-
 fullnameOverride: cloud-native-demo
-
 image:
   repository: ghcr.io/emara7/cloud-native-demo
-  tag: stable
+  tag: sha-07207a0b0e653e1b36a687b7be12b83324db6c26
   pullPolicy: IfNotPresent
-
 ingress:
   hosts:
     - host: demo.example.com
       paths:
         - path: /
           pathType: Prefix
-
 resources:
   requests:
     cpu: 200m
@@ -21,17 +17,14 @@ resources:
   limits:
     cpu: 1000m
     memory: 512Mi
-
 autoscaling:
   enabled: true
   minReplicas: 3
   maxReplicas: 10
   targetCPUUtilizationPercentage: 65
-
 env:
   LOG_LEVEL: INFO
   APP_VERSION: prod
-
 serviceMonitor:
   enabled: true
   interval: 15s
