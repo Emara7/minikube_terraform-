@@ -7,7 +7,7 @@ variable "cluster_name" {
 variable "kubeconfig_path" {
   description = "Path to kubeconfig used by Terraform providers."
   type        = string
-  default     = "~/.kube/config"
+  default     = null
 }
 
 variable "kube_context" {

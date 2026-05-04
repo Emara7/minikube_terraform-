@@ -1,7 +1,9 @@
 replicaCount: 3
 
+fullnameOverride: cloud-native-demo
+
 image:
-  repository: ghcr.io/OWNER/REPO/cloud-native-demo
+  repository: ghcr.io/emara7/cloud-native-demo
   tag: stable
   pullPolicy: IfNotPresent
 

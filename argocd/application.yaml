@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/OWNER/REPO.git
+    repoURL: https://github.com/Emara7/minikube_terraform-.git
     targetRevision: main
     path: helm/cloud-native-demo
     helm:

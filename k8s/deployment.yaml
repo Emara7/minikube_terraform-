@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: ghcr.io/OWNER/REPO/cloud-native-demo:dev
+          image: ghcr.io/emara7/cloud-native-demo:dev
           imagePullPolicy: IfNotPresent
           ports:
             - name: http

@@ -16,7 +16,6 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/cloud-native-demo
 
 jobs:
   build-and-update-chart:
@@ -35,11 +34,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Prepare image name
+        id: image
+        run: |
+          owner="$(echo "${GITHUB_REPOSITORY_OWNER}" | tr '[:upper:]' '[:lower:]')"
+          echo "repository=${REGISTRY}/${owner}/cloud-native-demo" >> "$GITHUB_OUTPUT"
+
       - name: Generate image metadata
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ steps.image.outputs.repository }}
           tags: |
             type=raw,value=sha-${{ github.sha }}
             type=ref,event=branch
@@ -59,7 +64,7 @@ jobs:
         with:
           cmd: yq -i '.image.repository = strenv(IMAGE_REPOSITORY) | .image.tag = strenv(IMAGE_TAG)' helm/cloud-native-demo/values-prod.yaml
         env:
-          IMAGE_REPOSITORY: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          IMAGE_REPOSITORY: ${{ steps.image.outputs.repository }}
           IMAGE_TAG: sha-${{ github.sha }}
 
       - name: Commit chart update

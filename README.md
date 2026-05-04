@@ -87,7 +87,7 @@ helm upgrade --install cloud-native-demo ../../helm/cloud-native-demo \
 ### 4. Test the service
 
 ```bash
-kubectl -n cloud-native-demo port-forward svc/cloud-native-demo-cloud-native-demo 8080:80
+kubectl -n cloud-native-demo port-forward svc/cloud-native-demo 8080:80
 curl http://127.0.0.1:8080/health
 curl http://127.0.0.1:8080/api
 curl http://127.0.0.1:8080/metrics
@@ -102,9 +102,9 @@ curl http://cloud-native-demo.local/api
 
 ## GitOps with ArgoCD
 
-Edit `argocd/application.yaml` before applying it:
+Review `argocd/application.yaml` before applying it:
 
-- Replace `https://github.com/OWNER/REPO.git` with this repository URL.
+- Verify `repoURL` points to the repository ArgoCD should watch.
 - Set `targetRevision` to the branch ArgoCD should track.
 - Keep `path: helm/cloud-native-demo` unless the chart moves.
 
