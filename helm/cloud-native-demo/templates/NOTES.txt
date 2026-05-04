@@ -1,0 +1,7 @@
+1. Access the service locally with:
+   kubectl port-forward svc/{{ include "cloud-native-demo.fullname" . }} 8080:{{ .Values.service.port }}
+
+2. Test endpoints:
+   curl http://127.0.0.1:8080/health
+   curl http://127.0.0.1:8080/api
+   curl http://127.0.0.1:8080/metrics

@@ -1,0 +1,6 @@
+cluster_name            = "cloud-native-demo"
+kube_context            = "cloud-native-demo"
+minikube_driver         = "docker"
+minikube_cpus           = 4
+minikube_memory         = "6144mb"
+enable_platform_addons  = true

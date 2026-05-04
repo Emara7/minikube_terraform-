@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cloud-native-demo-cpu-loader
+  namespace: cloud-native-demo
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: load
+          image: busybox:1.36
+          command:
+            - /bin/sh
+            - -c
+            - |
+              end=$((SECONDS+300));
+              while [ $SECONDS -lt $end ]; do wget -q -O- http://cloud-native-demo:80/api >/dev/null || true; done

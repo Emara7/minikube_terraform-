@@ -1,0 +1,6 @@
+apiVersion: v2
+name: cloud-native-demo
+description: A production-like Flask microservice with metrics, probes, ingress, and autoscaling.
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

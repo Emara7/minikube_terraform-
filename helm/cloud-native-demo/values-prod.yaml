@@ -1,0 +1,35 @@
+replicaCount: 3
+
+image:
+  repository: ghcr.io/OWNER/REPO/cloud-native-demo
+  tag: stable
+  pullPolicy: IfNotPresent
+
+ingress:
+  hosts:
+    - host: demo.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+
+resources:
+  requests:
+    cpu: 200m
+    memory: 256Mi
+  limits:
+    cpu: 1000m
+    memory: 512Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 65
+
+env:
+  LOG_LEVEL: INFO
+  APP_VERSION: prod
+
+serviceMonitor:
+  enabled: true
+  interval: 15s
